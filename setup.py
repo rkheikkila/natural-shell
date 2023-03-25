@@ -7,5 +7,5 @@ setup(
     description="Natural language interface to Unix shell",
     entry_points={"console_scripts": ["nash = nash:main"]},
     py_modules=["nash", "prompts"],
-    requires=["openai"]
+    requires=["openai"],
 )

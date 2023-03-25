@@ -26,19 +26,15 @@ def get_command(task: str) -> CommandResponse:
     """Query for shell command from ChatGPT."""
     messages = [
         {"role": "system", "content": system_prompt},
-        {"role": "user", "content": task + user_instruction}
+        {"role": "user", "content": task + user_instruction},
     ]
 
-    api_response = openai.ChatCompletion.create(
-        model = model,
-        messages = messages
-    )
+    api_response = openai.ChatCompletion.create(model=model, messages=messages)
 
     assistant_response = json.loads(api_response["choices"][0]["message"]["content"])
     response = CommandResponse(**assistant_response)
     return response
-    
-    
+
 
 def make_heading(heading: str, padding=20) -> str:
     dashes = "-" * padding
@@ -51,7 +47,7 @@ def print_output(output: CommandResponse) -> None:
 
     for cmd in output.commands:
         print(cmd)
-    
+
     print("")
     print(make_heading("EXPLANATION"))
     print("")
@@ -65,7 +61,7 @@ def main() -> None:
     if not args:
         print("A prompt is needed.")
         sys.exit(0)
-    user_prompt = ' '.join(args)
+    user_prompt = " ".join(args)
 
     try:
         output = get_command(user_prompt)
